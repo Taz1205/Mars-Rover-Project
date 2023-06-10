@@ -110,5 +110,17 @@ describe("Mars Rover Functionality", () => {
     it("Check for moving right 4 rotations", () => {
       expect(executeInstructions(["5 5", "1 2 N", "RRRR"])).toBe("1 2 N");
     });
+    it("Check for mixed instructions", () => {
+      expect(executeInstructions(["5 5", "1 2 N", "LMLMLMLMM"])).toBe("1 3 N");
+    });
+    it("Check for mixed instructions", () => {
+      expect(executeInstructions(["5 5", "3 3 E", "MMRMMRMRRM"])).toBe("5 1 E");
+    });
+    it("Check for mixed instructions", () => {
+      expect(executeInstructions(["5 5", "0 0 N", "MRMLM"])).toBe("1 2 N");
+    });
+    it("Check for mixed instructions", () => {
+      expect(executeInstructions(["5 5", "5 5 S", "MRMLM"])).toBe("4 3 S");
+    });
   });
 });
