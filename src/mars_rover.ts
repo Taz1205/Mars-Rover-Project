@@ -4,8 +4,16 @@ export type Position = {
   x: number;
   y: number;
 };
+
 export function initialPosition() {
   return "0 0 N";
+}
+function isValidPosition(position: Position): boolean {
+  return position.x >= 0 && position.y >= 0;
+}
+function isValidDirection(direction: string): boolean {
+  const validDirections = ["N", "S", "E", "W"];
+  return validDirections.includes(direction);
 }
 
 export function executeInstructions(input: string[]) {
@@ -15,7 +23,6 @@ export function executeInstructions(input: string[]) {
   const plateauCheck = checkPlateauSize(plateauWidth, plateauHeight);
   const plateauCreate = createPlateau(plateauWidth, plateauHeight);
   input.splice(0, 1);
-  console.log(input);
   const rovers = [];
   const roverPosition = input[0].split(" ");
   let position: Position = {
@@ -23,5 +30,10 @@ export function executeInstructions(input: string[]) {
     y: Number(roverPosition[1]),
   };
   let direction: string = roverPosition[2];
-  return `${position.x} ${position.y} ${direction}`;
+  if (!isValidPosition(position)) 
+ return ("Invalid position");
+ else if(!isValidDirection(direction))
+ return ("Invalid direction");
+ else
+ return `${position.x} ${position.y} ${direction}`;
 }
