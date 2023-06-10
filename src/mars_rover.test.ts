@@ -17,11 +17,13 @@ describe("Grid/Plateau Size", () => {
     expect(executeInstructions(['8 6'])).toBe('8 6');
   });
   it("should check if grid size input is empty", () => {
-    expect(executeInstructions(['1 -1'])).toBe("Invalid plateau size");
+    expect(executeInstructions([''])).toBe("Invalid plateau size");
   });
-  it("should check if grid size input are positive integers", () => {
+  it("should check if grid size input are numbers/integers", () => {
     expect(executeInstructions(['A B'])).toBe("Invalid plateau size");
   });
-
+  it("should check if grid size input are positive integers", () => {
+    expect(executeInstructions(['-1 -10'])).toBe("Invalid plateau size");
+  });
 });
 });
