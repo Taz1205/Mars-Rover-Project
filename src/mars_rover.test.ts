@@ -1,4 +1,5 @@
 import { executeInstructions, initialPosition } from "./mars_rover";
+import {createPlateau} from "./create_plateau";
 
 describe("Mars Rover Functionality", () => {
   describe("Rover Initial Position", () => {
@@ -22,5 +23,31 @@ describe("Mars Rover Functionality", () => {
     it("should check if grid size input are positive integers", () => {
       expect(executeInstructions(["-1 -10"])).toBe("Invalid plateau size");
     });
+    describe("createPlateau", () => {
+      it("should create a square plateau with the correct dimensions", () => {
+        const width = 10;
+        const height = 10;
+    
+        const plateau = createPlateau(width, height);
+    
+        expect(plateau.length).toBe(4);
+        expect(plateau[0]).toEqual({ x: 0, y: 0 });
+        expect(plateau[1]).toEqual({ x: width, y: 0 });
+        expect(plateau[2]).toEqual({ x: width, y: height });
+        expect(plateau[3]).toEqual({ x: 0, y: height });
+      });
+      it("should create a rectangle plateau with the correct dimensions", () => {
+        const width = 8;
+        const height = 6;
+    
+        const plateau = createPlateau(width, height);
+    
+        expect(plateau.length).toBe(4);
+        expect(plateau[0]).toEqual({ x: 0, y: 0 });
+        expect(plateau[1]).toEqual({ x: width, y: 0 });
+        expect(plateau[2]).toEqual({ x: width, y: height });
+        expect(plateau[3]).toEqual({ x: 0, y: height });
+      });
   });
+});
 });

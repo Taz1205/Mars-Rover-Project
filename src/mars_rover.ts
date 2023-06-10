@@ -1,3 +1,5 @@
+import {createPlateau} from "./create_plateau";
+
 export function initialPosition() {
   return "0 0 N";
 }
@@ -15,5 +17,9 @@ export function executeInstructions(input: string[]) {
     !Number.isInteger(plateauHeight)
   )
     return "Invalid plateau size";
-  else return plateauWidth + " " + plateauHeight;
+  else 
+  {
+    const plateau = createPlateau(plateauWidth, plateauHeight);
+    return plateauWidth + " " + plateauHeight;
+  }
 }
