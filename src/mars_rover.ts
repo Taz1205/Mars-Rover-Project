@@ -6,6 +6,9 @@ export function executeInstructions(input: string[]){
   const plateauSize = input[0].split(" ").map(Number);
   const plateauWidth = plateauSize[0];
   const plateauHeight = plateauSize[1]; 
-  
-  return plateauWidth + " " + plateauHeight;
+  if (plateauWidth < 0 || !Number.isInteger(plateauWidth) || plateauHeight < 0 
+  || !Number.isInteger(plateauHeight)) {
+    return "Invalid plateau size";
+  }
+  else return plateauWidth + " " + plateauHeight;
 }
