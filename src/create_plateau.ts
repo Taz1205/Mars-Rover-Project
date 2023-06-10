@@ -7,3 +7,18 @@ export function createPlateau(plateauWidth: number, plateauHeight: number) {
     ];
   }
 
+  export function checkPlateauSize(plateauWidth: number, plateauHeight: number) {
+    if (
+      !plateauWidth ||
+      !plateauHeight ||
+      plateauWidth < 0 ||
+      !Number.isInteger(plateauWidth) ||
+      plateauHeight < 0 ||
+      !Number.isInteger(plateauHeight)
+    )
+      return "Invalid plateau size";
+    else 
+    {
+      return plateauWidth + " " + plateauHeight;
+    }
+  }
