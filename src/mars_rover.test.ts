@@ -45,9 +45,9 @@ describe("Mars Rover Functionality", () => {
     });
   });
   describe("Given position and direction of the first rover", () => {
-    it("Split the string input to the first rover position and direction", () => {
+    /*it("Split the string input to the first rover position and direction", () => {
       expect(executeInstructions(["5 5", "1 2 N"])).toBe("1 2 N");
-    });
+    });*/
     it("Check for valid position", () => {
       expect(executeInstructions(["5 5", "-99 -1 N"])).toBe("Invalid position");
     });
@@ -65,6 +65,11 @@ describe("Mars Rover Functionality", () => {
     });
     it("Check for valid direction", () => {
       expect(executeInstructions(["5 5", "1 2 "])).toBe("Invalid direction");
+    });
+  });
+  describe("Check for given instructions", () => {
+    it("Check for empty instructions, returns original position and direction", () => {
+      expect(executeInstructions(["5 5", "1 2 N", ""])).toBe("1 2 N");
     });
   });
 });

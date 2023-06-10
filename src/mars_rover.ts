@@ -1,4 +1,7 @@
 import { createPlateau, checkPlateauSize } from "./create_plateau";
+import { moveForward } from "./move_forward";
+import { turnLeft } from "./turn_left";
+import { turnRight } from "./turn_right";
 
 export type Position = {
   x: number;
@@ -25,15 +28,40 @@ export function executeInstructions(input: string[]) {
   input.splice(0, 1);
   const rovers = [];
   const roverPosition = input[0].split(" ");
+  const roverInstructions = input[1];
+  input.splice(0, 1);
   let position: Position = {
     x: Number(roverPosition[0]),
     y: Number(roverPosition[1]),
   };
   let direction: string = roverPosition[2];
-  if (!isValidPosition(position)) 
- return ("Invalid position");
- else if(!isValidDirection(direction))
- return ("Invalid direction");
- else
- return `${position.x} ${position.y} ${direction}`;
+  if (!isValidPosition(position)) return "Invalid position";
+  else if (!isValidDirection(direction)) return "Invalid direction";
+  else {
+    if(roverInstructions.length !== 0) {
+    for (let i = 0; i < roverInstructions.length; i++) {
+      const instruction = roverInstructions[i];
+      switch (instruction) {
+        case "L":
+          direction = turnLeft(direction);
+          break;
+        case "R":
+          direction = turnRight(direction);
+          break;
+        case "M":
+          position = moveForward(
+            plateauWidth,
+            plateauHeight,
+            position,
+            direction
+          );
+          break;
+        default:
+          throw new Error(`Valid instructions can only be 'L', 'R' or 'M'`);
+      }
+    }
+    rovers.push({ position, direction });
+  }
+    return `${position.x} ${position.y} ${direction}`;
+  }
 }
