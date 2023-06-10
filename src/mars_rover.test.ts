@@ -71,5 +71,44 @@ describe("Mars Rover Functionality", () => {
     it("Check for empty instructions, returns original position and direction", () => {
       expect(executeInstructions(["5 5", "1 2 N", ""])).toBe("1 2 N");
     });
+    it("Check for invalid instructions", () => {
+      expect(executeInstructions(["5 5", "1 2 N", "B"])).toBe("Valid instructions can only be 'L', 'R' or 'M'");
+    });
+    it("Check for moving forward once from 1 2 N", () => {
+      expect(executeInstructions(["5 5", "1 2 N", "M"])).toBe("1 3 N");
+    });
+    it("Check for moving forward 3 steps from 1 2 N", () => {
+      expect(executeInstructions(["5 5", "1 2 N", "MMM"])).toBe("1 5 N");
+    });
+    it("Check for moving forward once from 1 2 S", () => {
+      expect(executeInstructions(["5 5", "1 2 S", "M"])).toBe("1 1 S");
+    });
+    it("Check for moving forward 3 steps from 1 2 S", () => {
+      expect(executeInstructions(["5 5", "1 2 S", "MM"])).toBe("1 0 S");
+    });
+    it("Check for moving forward once from 1 2 E", () => {
+      expect(executeInstructions(["5 5", "1 2 E", "M"])).toBe("2 2 E");
+    });
+    it("Check for moving forward 3 steps from 1 2 E", () => {
+      expect(executeInstructions(["5 5", "1 2 E", "MMMM"])).toBe("5 2 E");
+    });
+    it("Check for moving forward once from 1 2 W", () => {
+      expect(executeInstructions(["5 5", "1 2 W", "M"])).toBe("0 2 W");
+    });
+    it("Check for moving forward 3 steps from 5 5 W", () => {
+      expect(executeInstructions(["5 5", "5 5 W", "MMMMM"])).toBe("0 5 W");
+    });
+    it("Check for moving left  once", () => {
+      expect(executeInstructions(["5 5", "1 2 N", "L"])).toBe("1 2 W");
+    });
+    it("Check for moving left 2 rotations", () => {
+      expect(executeInstructions(["5 5", "1 2 N", "LL"])).toBe("1 2 S");
+    });
+    it("Check for moving right once", () => {
+      expect(executeInstructions(["5 5", "1 2 N", "R"])).toBe("1 2 E");
+    });
+    it("Check for moving right 4 rotations", () => {
+      expect(executeInstructions(["5 5", "1 2 N", "RRRR"])).toBe("1 2 N");
+    });
   });
 });

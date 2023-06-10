@@ -57,7 +57,7 @@ export function executeInstructions(input: string[]) {
           );
           break;
         default:
-          throw new Error(`Valid instructions can only be 'L', 'R' or 'M'`);
+          return `Valid instructions can only be 'L', 'R' or 'M'`;
       }
     }
     rovers.push({ position, direction });
