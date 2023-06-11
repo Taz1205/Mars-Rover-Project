@@ -24,14 +24,15 @@ function isValidDirection(direction: string): boolean {
 
 export function executeInstructions(input: string[]) {
   const plateauSize = input[0].split(" ").map(Number);
-  const plateauWidth = plateauSize[0];
-  const plateauHeight = plateauSize[1];
+  const plateauWidth = plateauSize[0] + 1;
+  const plateauHeight = plateauSize[1] + 1;
   const plateauCheck = checkPlateauSize(plateauWidth, plateauHeight);
   const plateauCreate = createPlateau(plateauWidth, plateauHeight);
   input.splice(0, 1);
-  const rovers = [];
-  const roverPosition = input[0].split(" ");
-  const roverInstructions = input[1];
+  let output = [];
+  for(let i=0; i<input.length; i++) {
+  const roverPosition = input[i].split(" ");
+  const roverInstructions = input[i+1];
   input.splice(0, 1);
   let position: Position = {
     x: Number(roverPosition[0]),
@@ -64,8 +65,11 @@ export function executeInstructions(input: string[]) {
           return `Valid instructions can only be 'L', 'R' or 'M'`;
       }
     }
-    rovers.push({ position, direction });
+    output.push({position, direction});
   }
+  }
+  
     return `${position.x} ${position.y} ${direction}`;
+
   }
 }
