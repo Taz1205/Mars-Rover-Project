@@ -11,6 +11,9 @@ export type Position = {
 export function initialPosition() {
   return "0 0 N";
 }
+function isWithinBoundaries(position: Position, plateauWidth: number, plateauHeight: number): boolean {
+  return position.x >= 0 && position.x <= plateauWidth && position.y >= 0 && position.y <= plateauHeight;
+}
 function isValidPosition(position: Position): boolean {
   return position.x >= 0 && position.y >= 0;
 }
@@ -35,7 +38,8 @@ export function executeInstructions(input: string[]) {
     y: Number(roverPosition[1]),
   };
   let direction: string = roverPosition[2];
-  if (!isValidPosition(position)) return "Invalid position";
+   if (!isValidPosition(position)) return "Invalid position";
+   else if (!isWithinBoundaries(position, plateauWidth, plateauHeight)) return "Invalid boundary";
   else if (!isValidDirection(direction)) return "Invalid direction";
   else {
     if(roverInstructions.length !== 0) {

@@ -2,6 +2,7 @@ export type Position = {
   x: number;
   y: number;
 }
+
 export function moveForward(plateauWidth: number, plateauHeight: number,position: Position, direction: string) {
         let newPosition: Position = { ...position };
       
@@ -21,15 +22,14 @@ export function moveForward(plateauWidth: number, plateauHeight: number,position
             default:
       throw new Error(`Invalid direction: ${direction}`);
         }
-        if (
-          newPosition.x >= 0 &&
-          newPosition.x < plateauWidth &&
-          newPosition.y >= 0 &&
-          newPosition.y < plateauHeight
-        ) {
-          position = newPosition;
-        } else {
-          console.log("Invalid move. Rover cannot go beyond the plateau boundaries.");
-        }
+          if (newPosition.x > plateauWidth)
+          newPosition.x = newPosition.x - (plateauWidth);
+          else if (newPosition.x < 0)
+          newPosition.x = newPosition.x + (plateauWidth);
+          else if (newPosition.y > plateauHeight)
+          newPosition.y = newPosition.y - (plateauHeight);
+          else if (newPosition.y < 0)
+          newPosition.y = newPosition.y + (plateauHeight);
+        position = newPosition;
         return newPosition;
       }

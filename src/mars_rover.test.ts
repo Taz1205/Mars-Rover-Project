@@ -45,9 +45,12 @@ describe("Mars Rover Functionality", () => {
     });
   });
   describe("Given position and direction of the first rover", () => {
-    /*it("Split the string input to the first rover position and direction", () => {
+   /* it("Split the string input to the first rover position and direction", () => {
       expect(executeInstructions(["5 5", "1 2 N"])).toBe("1 2 N");
     });*/
+    it("Check for boundaries", () => {
+      expect(executeInstructions(["5 5", "6 6 N"])).toBe("Invalid boundary");
+    });
     it("Check for valid position", () => {
       expect(executeInstructions(["5 5", "-99 -1 N"])).toBe("Invalid position");
     });
@@ -119,8 +122,25 @@ describe("Mars Rover Functionality", () => {
     it("Check for mixed instructions", () => {
       expect(executeInstructions(["5 5", "0 0 N", "MRMLM"])).toBe("1 2 N");
     });
-    it("Check for mixed instructions", () => {
+    it("Checks for mixed instructions", () => {
       expect(executeInstructions(["5 5", "5 5 S", "MRMLM"])).toBe("4 3 S");
     });
+    it("Checks for boundaries after moving in S direction", () => {
+      expect(executeInstructions(["5 5", "5 5 S", "MMMMMM"])).toBe("5 4 S");
+    });
+    it("Checks for boundaries after moving in N direction", () => {
+      expect(executeInstructions(["5 5", "0 0 N", "MMMMMMM"])).toBe("0 2 N");
+    });
+    it("Checks for boundaries after moving in E direction", () => {
+      expect(executeInstructions(["9 9", "9 9 E", "M"])).toBe("1 9 E");
+    });
+    it("Checks for boundaries after moving in W direction", () => {
+      expect(executeInstructions(["10 10", "0 0 W", "MMMMMMM"])).toBe("3 0 W");
+    });
+  });
+  describe("Check for 2nd Rover", () => {
+   /* it("Check for final position of both rovers", () => {
+      expect(executeInstructions(["5 5", "1 2 N", "M", "3 3 E","M"])).toBe("1 3 N");
+    });*/
   });
 });
