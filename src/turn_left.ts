@@ -1,4 +1,4 @@
-export function turnLeft(direction: string) {
+export function turnLeft(direction: Direction) {
   switch (direction) {
     case "N":
       return "W";

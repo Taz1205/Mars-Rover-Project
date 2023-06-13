@@ -1,6 +1,7 @@
 //import { executeInstructions, initialPosition } from "./mars_rover";
 import { turnLeft } from "./turn_left";
 import { turnRight } from "./turn_right";
+import { moveForward } from "./move_forward";
 
 
 describe("Mars Rover Functionality", () => {
@@ -32,4 +33,19 @@ describe("Mars Rover Functionality", () => {
       expect(turnRight("W")).toBe("N");
     });
   });
+  describe("Move forward", () => {
+    it("When moving N, increment the y co-ordinate", () => {
+      expect(moveForward("N", [1,1])).toEqual([1,2]);
+    });
+      it("When moving E, increment the x co-ordinate", () => {
+        expect(moveForward("E", [1,1])).toEqual([2,1]);
+      });
+        it("When moving S, decrement the y co-ordinate", () => {
+          expect(moveForward("S", [1,1])).toEqual([1,0]);
+        });
+    it("When moving W, decrement the x co-ordinate", () => {
+      expect(moveForward("W", [1,1])).toEqual([0,1]);
+    });
+  });
+  
 });
