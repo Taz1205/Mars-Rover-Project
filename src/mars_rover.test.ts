@@ -1,8 +1,7 @@
 //import { executeInstructions, initialPosition } from "./mars_rover";
 import { turnLeft } from "./turn_left";
 import { turnRight } from "./turn_right";
-import { moveForward, getNextPosition } from "./move_forward";
-import { executeInstructions, rover } from "./mars_rover";
+import { moveForward } from "./move_forward";
 
 
 describe("Mars Rover Functionality", () => {
@@ -48,21 +47,5 @@ describe("Mars Rover Functionality", () => {
       expect(moveForward("W", [1,1])).toEqual([0,1]);
     });
   });
-  /*describe("Moving forward", () => {
-    it("Turn left from N", () => {
-      expect(executeInstructions("M", rover("N")).toEqual(rover("N",[1,2])));
-    });
-      it("Turn left from ", () => {
-        const initialState = {direction:"E", position: [1,1]};
-        expect(executeInstructions("L", initialState).toEqual("N"));
-      });
-        it("Turn left from ", () => {
-          const initialState = {direction:"S", position: [1,1]};
-          expect(executeInstructions("L", initialState)).toEqual("E");
-        });
-    it("Turn left from ", () => {
-      const initialState = {direction:"W", position: [1,1]};
-      expect(executeInstructions("L", initialState).toEqual("S"));
-    });
-  });*/
+  
 });

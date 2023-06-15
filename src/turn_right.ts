@@ -1,5 +1,3 @@
-type Direction = "N" | "W" | "S" | "E";
-
 export function turnRight(direction: Direction) {
   switch (direction) {
     case "N":
