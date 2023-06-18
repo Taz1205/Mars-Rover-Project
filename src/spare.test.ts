@@ -146,18 +146,18 @@ describe("Mars Rover Functionality", () => {
       );
     });
     it("Check for moving left 2 rotations", () => {
-      expect(executeInstructions(["8 6", "1 2 N", "M", "0 0 E", "LL"])).toBe(
-        "Roam-E.0: 1 3 N Marvello: 0 0 W"
+      expect(executeInstructions(["8 6", "1 2 N", "M", "6 6 E", "LL"])).toBe(
+        "Roam-E.0: 1 3 N Marvello: 6 6 W"
       );
     });
     it("Check for moving right once", () => {
-      expect(executeInstructions(["6 6", "0 0 W", "RM", "0 0 N", "R"])).toBe(
-        "Roam-E.0: 0 1 N Marvello: 0 0 E"
+      expect(executeInstructions(["6 6", "1 2 N", "R", "0 0 W", "M"])).toBe(
+        "Roam-E.0: 1 2 E Marvello: 6 0 W"
       );
     });
     it("Check for moving right 4 rotations", () => {
-      expect(executeInstructions(["5 5", "0 0 N", "RRRR", "0 0 W", "M" ])).toBe(
-        "Roam-E.0: 0 0 N Marvello: 5 0 W"
+      expect(executeInstructions(["5 5", "1 2 N", "RRRR", "0 0 W", "M" ])).toBe(
+        "Roam-E.0: 1 2 N Marvello: 5 0 W"
       );
     });
     it("Check for mixed instructions", () => {

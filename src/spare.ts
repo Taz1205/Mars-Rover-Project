@@ -7,7 +7,6 @@ export type Position = {
   x: number;
   y: number;
 };
-type Direction = "N" | "W" | "S" | "E";
 
 export function initialPosition() {
   const initPos = '0 0 N';
@@ -126,4 +125,3 @@ roverNameIndex++;
   }
   return output.trim();
 }
-

@@ -1,4 +1,4 @@
-export function turnLeft(direction: Direction) {
+export function turnLeft(direction: string) {
   switch (direction) {
     case "N":
       return "W";
@@ -9,6 +9,6 @@ export function turnLeft(direction: Direction) {
     case "W":
       return "S";
     default:
-      throw new Error(`Invalid direction: ${direction}`);
+      return `Invalid direction: ${direction}`;
   }
 }
