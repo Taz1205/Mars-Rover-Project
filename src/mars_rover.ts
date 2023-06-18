@@ -57,7 +57,6 @@ export function executeInstructions(input: string[]) {
   for (let i = 0; i < input.length; i += 2) {
     const roverPosition = input[i].split(" ");
     const roverInstructions = input[i + 1];
-    //input.splice(0, 1);
 
     let position: Position = {
       x: Number(roverPosition[0]),
@@ -99,6 +98,7 @@ export function executeInstructions(input: string[]) {
               !detectCollision(newPosition, roverPositions)
             ) {
               position = newPosition;
+              roverPositions[roverPositions.length - 1] = newPosition;
             } else {
               return `Rover ${roverName} cannot move to position (${newPosition.x}, ${newPosition.y})`;
             }
@@ -109,17 +109,6 @@ export function executeInstructions(input: string[]) {
       }
       rovers.push({ roverName, newPosition, direction });
       roverPositions.push(position);
-      collisionDetected = detectCollision(newPosition, roverPositions);
-      for (let i = 0; i < rovers.length; i++) {
-        for (let j = i + 1; j < rovers.length; j++) {
-          if (
-            rovers[i].newPosition.x === rovers[j].newPosition.x &&
-            rovers[i].newPosition.y === rovers[j].newPosition.y
-          ) {
-            return `Collision detected between ${rovers[i].roverName} and ${rovers[j].roverName}`;
-          }
-        }
-      }
     }
   }
   let output = "";
