@@ -10,7 +10,7 @@ export type Position = {
 type Direction = "N" | "W" | "S" | "E";
 
 export function initialPosition() {
-  const initPos = '0 0 N';
+  const initPos = "0 0 N";
   return initPos;
 }
 function isWithinBoundaries(
@@ -52,9 +52,9 @@ export function executeInstructions(input: string[]) {
   let rovers = [];
   const roverPositions = [];
   let collisionDetected = false;
-  const roverNames = ["Roam-E.0","Marvello", "Rove-X"];
+  const roverNames = ["Roam-E.0", "Marvello", "Rove-X"];
   let roverNameIndex = 0;
-  for (let i = 0; i < input.length; i+=2) {
+  for (let i = 0; i < input.length; i += 2) {
     const roverPosition = input[i].split(" ");
     const roverInstructions = input[i + 1];
     //input.splice(0, 1);
@@ -69,54 +69,58 @@ export function executeInstructions(input: string[]) {
     };
     let direction: string = roverPosition[2];
     const roverName = roverNames[roverNameIndex] || `Rover ${roverNameIndex}`;
-roverNameIndex++;
+    roverNameIndex++;
 
     if (!isValidPosition(position)) return "Invalid position";
     else if (!isWithinBoundaries(position, plateauWidth, plateauHeight))
       return "Invalid boundary";
     else if (!isValidDirection(direction)) return "Invalid direction";
     else if (roverInstructions.length === 0)
-        return "Please input some instructions";
-      else {
-        for (let i = 0; i < roverInstructions.length; i++) {
-          const instruction = roverInstructions[i];
-          switch (instruction) {
-            case "L":
-              direction = turnLeft(direction);
-              break;
-            case "R":
-              direction = turnRight(direction);
-              break;
-            case "M":
-              newPosition = moveForward(
-                plateauWidth,
-                plateauHeight,
-                position,
-                direction
-              );
-              if(isWithinBoundaries(newPosition, plateauWidth, plateauHeight) && 
-              !detectCollision(newPosition, roverPositions)) {
-               position = newPosition;
-           } else {
-               return `Rover ${roverName} cannot move to position (${newPosition.x}, ${newPosition.y})`;
-           }
-           break;
-            default:
-              return `Valid instructions can only be 'L', 'R' or 'M'`;
+      return "Please input some instructions";
+    else {
+      for (let i = 0; i < roverInstructions.length; i++) {
+        const instruction = roverInstructions[i];
+        switch (instruction) {
+          case "L":
+            direction = turnLeft(direction);
+            break;
+          case "R":
+            direction = turnRight(direction);
+            break;
+          case "M":
+            newPosition = moveForward(
+              plateauWidth,
+              plateauHeight,
+              position,
+              direction
+            );
+            if (
+              isWithinBoundaries(newPosition, plateauWidth, plateauHeight) &&
+              !detectCollision(newPosition, roverPositions)
+            ) {
+              position = newPosition;
+            } else {
+              return `Rover ${roverName} cannot move to position (${newPosition.x}, ${newPosition.y})`;
+            }
+            break;
+          default:
+            return `Valid instructions can only be 'L', 'R' or 'M'`;
+        }
+      }
+      rovers.push({ roverName, newPosition, direction });
+      roverPositions.push(position);
+      collisionDetected = detectCollision(newPosition, roverPositions);
+      for (let i = 0; i < rovers.length; i++) {
+        for (let j = i + 1; j < rovers.length; j++) {
+          if (
+            rovers[i].newPosition.x === rovers[j].newPosition.x &&
+            rovers[i].newPosition.y === rovers[j].newPosition.y
+          ) {
+            return `Collision detected between ${rovers[i].roverName} and ${rovers[j].roverName}`;
           }
         }
-        rovers.push({ roverName, newPosition, direction });
-        roverPositions.push(position);
-        collisionDetected = detectCollision(newPosition, roverPositions);
-        for (let i = 0; i < rovers.length; i++) {
-          for (let j = i + 1; j < rovers.length; j++) {
-              if (rovers[i].newPosition.x === rovers[j].newPosition.x &&
-                  rovers[i].newPosition.y === rovers[j].newPosition.y) {
-                  return `Collision detected between ${rovers[i].roverName} and ${rovers[j].roverName}`;
-              }
-          }
       }
-      }
+    }
   }
   let output = "";
   for (let i = 0; i < rovers.length; i++) {
@@ -126,4 +130,3 @@ roverNameIndex++;
   }
   return output.trim();
 }
-

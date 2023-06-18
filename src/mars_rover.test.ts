@@ -1,4 +1,4 @@
-import { executeInstructions, initialPosition } from "./spare";
+import { executeInstructions, initialPosition } from "./mars_rover";
 import { createPlateau, checkPlateauSize } from "./create_plateau";
 
 describe("Mars Rover Functionality", () => {
@@ -156,7 +156,7 @@ describe("Mars Rover Functionality", () => {
       );
     });
     it("Check for moving right 4 rotations", () => {
-      expect(executeInstructions(["5 5", "0 0 N", "RRRR", "0 0 W", "M" ])).toBe(
+      expect(executeInstructions(["5 5", "0 0 N", "RRRR", "0 0 W", "M"])).toBe(
         "Roam-E.0: 0 0 N Marvello: 5 0 W"
       );
     });
